@@ -22,7 +22,6 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Run your script and capture output
+      - name: Run your script and capture output in real-time
         run: |
-          python crypto_tracker_me_trends2.py | tee output.log
-
+          python -u crypto_tracker_me_trends2.py | tee output.log
