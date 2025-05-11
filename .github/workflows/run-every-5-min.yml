@@ -26,9 +26,17 @@ jobs:
         run: |
           python crypto_tracker_me_trends2.py | tee output.log
 
-      - name: Send email with output
-        env:
-          EMAIL_USER: ${{ secrets.EMAIL_USER }}
-          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
-        run: python send_email.py
+      - name: Send Email with Log Output
+        uses: mendhak/send-email@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USER }}
+          password: ${{ secrets.EMAIL_PASS }}
+          subject: "Bitcoin Tracker Output"
+          body: "See attached log file"
+          to: ${{ secrets.RECIPIENT_EMAIL }}
+          from: ${{ secrets.EMAIL_USER }}
+          attachments: output.log
+
 
