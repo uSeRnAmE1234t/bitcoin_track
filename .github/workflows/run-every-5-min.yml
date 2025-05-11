@@ -26,3 +26,9 @@ jobs:
         run: |
           python crypto_tracker_me_trends2.py | tee output.log
 
+      - name: Send email with output
+        env:
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+        run: python send_email.py
+
